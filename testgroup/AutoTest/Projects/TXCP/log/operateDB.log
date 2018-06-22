@@ -1,0 +1,16 @@
+2018-06-05 18:11:34,168 - OperateDB.py:[line:91] - operateDB - INFO - table [t_offline_need]:truncate data success!
+2018-06-05 18:11:34,236 - OperateDB.py:[line:91] - operateDB - INFO - table [t_offline_record]:truncate data success!
+2018-06-05 18:11:34,268 - OperateDB.py:[line:91] - operateDB - INFO - table [t_tort_record]:truncate data success!
+2018-06-05 18:11:34,268 - OperateDB.py:[line:92] - operateDB - INFO - truncate data over!
+2018-06-05 18:11:35,111 - OperateDB.py:[line:83] - operateDB - INFO - file [t_offline_need.sql]:load data success!
+2018-06-05 18:12:08,205 - OperateDB.py:[line:83] - operateDB - INFO - file [t_offline_record.sql]:load data success!
+2018-06-05 18:12:58,052 - OperateDB.py:[line:83] - operateDB - INFO - file [t_tort_record.sql]:load data success!
+2018-06-05 18:12:58,053 - OperateDB.py:[line:84] - operateDB - INFO - load data over!
+2018-06-22 16:28:46,225 - OperateDB.py:[line:91] - operateDB - INFO - table [t_offline_need]:truncate data success!
+2018-06-22 16:28:46,317 - OperateDB.py:[line:91] - operateDB - INFO - table [t_offline_record]:truncate data success!
+2018-06-22 16:28:46,449 - OperateDB.py:[line:91] - operateDB - INFO - table [t_tort_record]:truncate data success!
+2018-06-22 16:28:46,449 - OperateDB.py:[line:92] - operateDB - INFO - truncate data over!
+2018-06-22 16:28:47,636 - OperateDB.py:[line:83] - operateDB - INFO - file [t_offline_need.sql]:load data success!
+2018-06-22 16:29:22,745 - OperateDB.py:[line:83] - operateDB - INFO - file [t_offline_record.sql]:load data success!
+2018-06-22 16:30:16,232 - OperateDB.py:[line:83] - operateDB - INFO - file [t_tort_record.sql]:load data success!
+2018-06-22 16:30:16,232 - OperateDB.py:[line:84] - operateDB - INFO - load data over!

@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>**迭代五自动化测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js"></script>
+    <!-- <script type="text/javascript" src="js/echarts.common.min.js"></script> -->
+    
+    
+<style type="text/css" media="screen">
+    body        { font-family: Microsoft YaHei,Consolas,arial,sans-serif; font-size: 130%; }
+    table       { font-size: 150%; }
+    pre         { white-space: pre-wrap;word-wrap: break-word; }
+
+    /* -- heading ---------------------------------------------------------------------- */
+    h1 {
+        font-size: 19pt;
+        color: gray;
+    }
+    .heading {
+        margin-top: 0ex;
+        margin-bottom: 1ex;
+    }
+
+    .heading .attribute {
+        margin-top: 1ex;
+        margin-bottom: 0;
+    }
+
+    .heading .description {
+        margin-top: 2ex;
+        margin-bottom: 3ex;
+    }
+
+    /* -- css div popup ------------------------------------------------------------------------ */
+    a.popup_link {
+    }
+
+    a.popup_link:hover {
+        color: red;
+    }
+
+    .popup_window {
+        display: none;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /*border: solid #627173 1px; */
+        padding: 10px;
+        /*background-color: #E6E6D6; */
+        font-family: "Lucida Console", "Courier New", Courier, monospace;
+        text-align: left;
+        font-size: 11pt;
+        /* width: 500px;*/
+    }
+
+    }
+    /* -- report ------------------------------------------------------------------------ */
+    #show_detail_line {
+        margin-top: 3ex;
+        margin-bottom: 1ex;
+    }
+    #result_table {
+        width: 99%;
+    }
+    #header_row {
+        font-weight: bold;
+        color: #303641;
+        background-color: #ebebeb;
+    }
+    #total_row  { font-weight: bold; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #6c6; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+
+
+    /* -- ending ---------------------------------------------------------------------- */
+    #ending {
+    }
+
+    #div_base {
+                position:absolute;
+                top:0%;
+                left:5%;
+                right:5%;
+                width: auto;
+                height: auto;
+                margin: -15px 0 0 0;
+    }
+</style>
+
+    
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+
+    /* level - 0:Summary; 1:Failed; 2:All */
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level < 1) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level > 1) {
+                    tr.className = '';
+                }
+                else {
+                    tr.className = 'hiddenRow';
+                }
+            }
+        }
+    }
+
+
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_'+tid).style.display = 'none'
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+
+
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        // alert(displayState)
+        if (displayState != 'block' ) {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+        else {
+            details_div.style.display = 'none'
+        }
+    }
+
+
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+
+    /* obsoleted by detail in <div>
+    function showOutput(id, name) {
+        var w = window.open("", //url
+                        name,
+                        "resizable,scrollbars,status,width=800,height=450");
+        d = w.document;
+        d.write("<pre>");
+        d.write(html_escape(output_list[id]));
+        d.write("\n");
+        d.write("<a href='javascript:window.close()'>close</a>\n");
+        d.write("</pre>\n");
+        d.close();
+    }
+    */
+    --></script>
+
+    <div id="div_base">
+        
+    <div class='page-header'>
+        <h1>**迭代五自动化测试报告</h1>
+    <p class='attribute'><strong>开始时间:</strong> 2018-06-22 16:30:16</p>
+<p class='attribute'><strong>运行时长:</strong> 0:07:00.687189</p>
+<p class='attribute'><strong>状态:</strong> 通过 44 失败 2 错误 4</p>
+
+    </div>
+    <div style="float: left;width:50%;"><p class='description'>测试用例执行结果</p></div>
+    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+
+        
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+    </div>
+    <p></p>
+    <table id='result_table' class="table table-bordered">
+        <colgroup>
+            <col align='left' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+        </colgroup>
+        <tr id='header_row'>
+            <td>测试套件/测试用例</td>
+            <td>总数</td>
+            <td>通过</td>
+            <td>失败</td>
+            <td>错误</td>
+            <td>查看</td>
+        </tr>
+        
+    <tr class='passClass'>
+        <td>Test000_LoginManagement.Login:  登录管理模块测试 </td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c1',2)">详情</a></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_login_sucess: 用户登陆</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_sign_out: 退出登录</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test001_UserManagement.UserManagement:  用户管理模块测试 </td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c2',3)">详情</a></td>
+    </tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_add_user: 新增用户</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_modify_user: 修改用户</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_del_user: 删除用户</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test002_GroupManagement.GroupManagement:  分组管理模块测试 </td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c3',4)">详情</a></td>
+    </tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_add_group: 新增分组</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_modify_group: 修改分组</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt3.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_configure_authority: 配置菜单</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt3.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04_del_group: 删除分组</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>Test003_ToAuditManagement.ToAuditManagement:  待审核网站列表模块测试 </td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>3</td>
+        <td><a href="javascript:showClassDetail('c4',4)">详情</a></td>
+    </tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_query_by_copyrightname: AUWL-001 : 根据版权名查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft4.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_02_query_by_date: AUWL-002 : 根据入库时间查询</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft4.2')" >
+        错误</a>
+
+    <div id='div_ft4.2' class="popup_window">
+        <pre>ft4.2: Message: 
+
+&lt;testgroup.AutoTest.Projects.TXCP.Pages.ToAuditPage.ToAudit object at 0x00000000025BA128&gt; 页面中未能找到 ('css selector', 'tr.el-table__row:nth-child(1) &gt; td:nth-child(2) &gt; div:nth-child(1)') 元素
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test003_ToAuditManagement.py", line 40, in test_02_query_by_date
+    "AND `status`='0';".format(self.startdate, self.enddate, self.get_website_id(self.toaudit))
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test003_ToAuditManagement.py", line 71, in get_website_id
+    website = toaudit.get_website()
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\Pages\ToAuditPage.py", line 50, in get_website
+    website = self.find_element_by(*self.web_loc).text
+AttributeError: 'NoneType' object has no attribute 'text'
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft4.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_03_query_by_copyright_and_date: AUWL-003 : 按照版权名和入库时间段查询</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft4.3')" >
+        错误</a>
+
+    <div id='div_ft4.3' class="popup_window">
+        <pre>ft4.3: Message: 
+
+&lt;testgroup.AutoTest.Projects.TXCP.Pages.ToAuditPage.ToAudit object at 0x00000000025BA128&gt; 页面中未能找到 ('css selector', 'tr.el-table__row:nth-child(1) &gt; td:nth-child(2) &gt; div:nth-child(1)') 元素
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test003_ToAuditManagement.py", line 53, in test_03_query_by_copyright_and_date
+    self.get_website_id(self.toaudit), self.copyrightname)
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test003_ToAuditManagement.py", line 71, in get_website_id
+    website = toaudit.get_website()
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\Pages\ToAuditPage.py", line 50, in get_website
+    website = self.find_element_by(*self.web_loc).text
+AttributeError: 'NoneType' object has no attribute 'text'
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft4.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_04_audit_list: AUWL-004 : 审核清单</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft4.4')" >
+        错误</a>
+
+    <div id='div_ft4.4' class="popup_window">
+        <pre>ft4.4: Message: 
+
+&lt;testgroup.AutoTest.Projects.TXCP.Pages.ToAuditPage.ToAudit object at 0x00000000025BA128&gt; 页面中未能找到 ('css selector', 'tr.el-table__row:nth-child(1) &gt; td:nth-child(2) &gt; div:nth-child(1)') 元素
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test003_ToAuditManagement.py", line 61, in test_04_audit_list
+    format(self.get_website_id(self.toaudit))
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test003_ToAuditManagement.py", line 71, in get_website_id
+    website = toaudit.get_website()
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\Pages\ToAuditPage.py", line 50, in get_website
+    website = self.find_element_by(*self.web_loc).text
+AttributeError: 'NoneType' object has no attribute 'text'
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test004_TortAuditManagement.ToAuditManagement:  待审核数据清单模块测试 </td>
+        <td>7</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c5',7)">详情</a></td>
+    </tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_query_by_website: AUBP-001 : 根据网站查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_query_by_url: AUBP-002 : 根据url查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_query_by_copyright_name: AUBP-003 : 根据版权名查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04_query_by_date: 根据入库时间查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05_audit: 审核登记</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05_query_combination: AUBP-004 : 组合查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt5.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06_offline: 已下线</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test005_OfflineManagement.OfflineManagement:  下线管理模块测试 </td>
+        <td>9</td>
+        <td>9</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c6',9)">详情</a></td>
+    </tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_import_offline_report: 下线清单导入</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_import_offline_result: 审核结果导入</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_query_by_website_list: 网站列表查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04_query_by_letter_status: 法务处理状态查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05_query_by_url: url查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_06_query_by_copyrightname: 版权名查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_07_query_by_date: 日期查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_08_offline_review: 下线审核</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt6.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_09_not_offline: 未下线</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='failClass'>
+        <td>Test006_LetterListManagement.LetterList:  法务处理模块测试 </td>
+        <td>5</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c7',5)">详情</a></td>
+    </tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_export: 未发函清单导出</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt7.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_query_by_letter_status: 通过法务处理状态查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt7.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_query_by_copyrightname: 通过版权名查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt7.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04_query_by_date: 通过日期查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft7.5' class='none'>
+    <td class='failCase'><div class='testcase'>test_05_import: 已发函清单导入</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft7.5')" >
+        失败</a>
+
+    <div id='div_ft7.5' class="popup_window">
+        <pre>ft7.5: Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test006_LetterListManagement.py", line 63, in test_05_import
+    self.assertNotEqual(before_count, self.law.page_value().replace('共', '').replace('条', '').strip(), '导入失败')
+AssertionError: '0' == '0' : 导入失败
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test007_WebSiteManagement.WebSite:  网站管理模块测试 </td>
+        <td>5</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c8',5)">详情</a></td>
+    </tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_query_by_webstie: 通过网站名称搜索</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt8.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_query_by_url: 通过url搜索</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt8.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_query_by_source: 通过数据来源搜索</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt8.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04_query_by_platform: 通过平台搜索</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt8.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_05_add_website: 新增站点</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>Test008_AuditTimeChangeManagement.AuditTimeChangeManagement:  审核时间变更模块测试 </td>
+        <td>5</td>
+        <td>4</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c9',5)">详情</a></td>
+    </tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_offline_status: 下线状态查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt9.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_query_by_website_list: 网站列表查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt9.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_query_by_data_source: 数据来源查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt9.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_04_query_by_copyrightname: 版权名查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft9.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_05_audit_time_change: 延后审核时间</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft9.5')" >
+        错误</a>
+
+    <div id='div_ft9.5' class="popup_window">
+        <pre>ft9.5: Message: 
+
+&lt;testgroup.AutoTest.Projects.TXCP.Pages.AuditTimeChangePage.AuditTime object at 0x0000000005436588&gt; 页面中未能找到 ('css selector', 'tr.el-table__row:nth-child(1) &gt; td:nth-child(10) &gt; div:nth-child(1) &gt; span:nth-child(1)') 元素
+Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test008_AuditTimeChangeManagement.py", line 65, in test_05_audit_time_change
+    old_cnt, new_cnt = self.AuditTimeChangePage.audit_time_change()
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\Pages\AuditTimeChangePage.py", line 73, in audit_time_change
+    old_cnt = self.find_element_by(*self.time_loc).text
+AttributeError: 'NoneType' object has no attribute 'text'
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test009_ReportExportManagement.ReportExport:  报表导出模块测试 </td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c10',1)">详情</a></td>
+    </tr>
+
+<tr id='pt10.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_report_export: 选择时间段导出</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>Test010_WorkloadManagement.Wordload:  工作量统计模块测试 </td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c11',3)">详情</a></td>
+    </tr>
+
+<tr id='pt11.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_qinquan_data: 侵权数据审核统计 -> 选择时间段查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt11.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_02_offline_data: 下线审核数据统计 -> 选择时间段查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt11.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_03_lawletter_data: 法务发函数据统计 -> 选择时间段查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='failClass'>
+        <td>Test011_WebsiteOfflineRateManagement.WebsiteOfflineRate:  网站下线率统计模块测试 </td>
+        <td>2</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c12',2)">详情</a></td>
+    </tr>
+
+<tr id='pt12.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01_query_by_website: 网站列表查询</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft12.2' class='none'>
+    <td class='failCase'><div class='testcase'>test_02_query_by_date: 选择时间段查询</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft12.2')" >
+        失败</a>
+
+    <div id='div_ft12.2' class="popup_window">
+        <pre>ft12.2: Traceback (most recent call last):
+  File "C:\Users\Administrator\PycharmProjects\smartvision\smartvision\testgroup\AutoTest\Projects\TXCP\TestCase\Test011_WebsiteOfflineRateManagement.py", line 39, in test_02_query_by_date
+    self.assertEqual(self.offline_rate.page_value().replace('共', '').replace('条', '').strip(), str(count-1))
+AssertionError: '15' != '14'
+- 15
++ 14
+
+</pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+        <tr id='total_row'>
+            <td>总计</td>
+            <td>50</td>
+            <td>44</td>
+            <td>2</td>
+            <td>4</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+        <div id='ending'>&nbsp;</div>
+        
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '测试执行情况',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            color: ['#95b75d', 'grey', '#b64645'],
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['通过','失败','错误']
+            },
+            series : [
+                {
+                    name: '测试执行情况',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:44, name:'通过'},
+                        {value:2, name:'失败'},
+                        {value:4, name:'错误'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    </div>
+</body>
+</html>
